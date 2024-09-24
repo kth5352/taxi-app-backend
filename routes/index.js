@@ -24,7 +24,7 @@ router.post("/taxi/login", function (req, res, next) {
   let fcmToken = req.body.fcmToken || "";
 
   // Prepared Statements 사용으로 보안 강화
-  let queryStr = "SELECT * FROM tb_user WHERE user_id = ? AND user_pw = ?";
+  let queryStr = `SELECT * FROM tb_user WHERE user_id = ? AND user_pw = ?`;
   console.log("login / queryStr = " + queryStr);
 
   db.query(queryStr, [userId, userPw], (err, rows, fields) => {
@@ -141,8 +141,8 @@ router.post("/taxi/call", function (req, res) {
     });
   }
 
-  const queryStr = `INSERT INTO tb_call (user_id, start_lat, start_lng, start_addr, end_lat, end_lng, end_addr, status, fcm_token)
-                    VALUES (?, ?, ?, ?, ?, ?, ?, 'REQ', '')`;
+  const queryStr = `INSERT INTO tb_call (user_id, start_lat, start_lng, start_addr, end_lat, end_lng, end_addr, fcm_token)
+                    VALUES (?, ?, ?, ?, ?, ?, ?, '')`;
 
   console.log("call / queryStr = " + queryStr);
 
